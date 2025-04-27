@@ -1,8 +1,9 @@
 package com.smv.budgetwiseapp.auth.model
 
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
 
-data class User(
+
+data class UserModel(
     val email: String,
     val createdAt: LocalDateTime,
     val deletedAt: LocalDateTime?

@@ -1,8 +1,8 @@
 package com.smv.budgetwiseapp.auth.application.internal.outport
 
-import com.smv.budgetwiseapp.auth.model.User
+import com.smv.budgetwiseapp.auth.model.UserModel
 
 interface UserOutPort {
-    fun save(email: String): User
-    fun getByEmail(email: String): User?
+    fun save(email: String): UserModel
+    fun getByEmail(email: String): UserModel?
 }

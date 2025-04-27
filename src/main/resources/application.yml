@@ -8,6 +8,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       schema: budget_app
+  exposed:
+    show-sql: true
+    generate-ddl: false
 
   security:
     oauth2:
@@ -16,3 +19,18 @@ spring:
           google:
             client-id: ${oauth2.google.client-id}
             client-secret: ${oauth2.google.client-secret}
+            scope: profile, email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            user-name-attribute: sub
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
