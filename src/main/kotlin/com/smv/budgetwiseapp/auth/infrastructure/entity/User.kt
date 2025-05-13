@@ -1,8 +1,12 @@
 package com.smv.budgetwiseapp.auth.infrastructure.entity
 
 
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.kotlin.datetime.datetime
+import org.jetbrains.exposed.sql.transactions.transaction
 
 object User : Table("user") {
     val id = integer("id").autoIncrement()

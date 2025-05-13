@@ -8,14 +8,17 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.stereotype.Repository
 
 @Repository
 class UserRepository : UserOutPort {
     override fun save(email: String): UserModel {
+        BeanPostProcessor
         val user = transaction {
             User.insert {
                 it[User.email] = email
@@ -27,7 +30,9 @@ class UserRepository : UserOutPort {
     }
 
     override fun getByEmail(email: String): UserModel? {
-        TODO("Not yet implemented")
+        return transaction {
+            User.select().singleOrNull()?.toUserModel()
+        }
     }
 
     fun ResultRow.toUserModel() = UserModel(

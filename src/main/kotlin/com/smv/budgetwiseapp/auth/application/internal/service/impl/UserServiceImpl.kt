@@ -13,9 +13,13 @@ class UserServiceImpl(private val userOutPort: UserOutPort) : DefaultOAuth2UserS
 
         val auth2User = super.loadUser(userRequest)
 
-        val email = auth2User.attributes["email"]
+        val email: String = auth2User.attributes["email"] as String
 
-        userOutPort.save(email as String)
+        val byEmail = userOutPort.getByEmail(email)
+
+        if (byEmail == null) {
+            userOutPort.save(email)
+        }
 
         return auth2User;
     }
