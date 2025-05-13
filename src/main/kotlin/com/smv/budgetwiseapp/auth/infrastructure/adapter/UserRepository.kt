@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class UserRepository : UserOutPort {
     override fun save(email: String): UserModel {
-        BeanPostProcessor
+
         val user = transaction {
             User.insert {
                 it[User.email] = email
@@ -31,6 +31,8 @@ class UserRepository : UserOutPort {
 
     override fun getByEmail(email: String): UserModel? {
         return transaction {
+            "select * from users where email = '$email'"
+            "insert into users(email, created_at) values(?, ?)"
             User.select().singleOrNull()?.toUserModel()
         }
     }
